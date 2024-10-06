@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="dist/styles.css" rel="stylesheet">
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>
+    
+    <link rel="icon" href="D.svg" type="image/x-icon"> 
+    <title>Discern AI</title>
+</head>
+
+<body class="bg-black">
+   
+    <header>
+        <div class="navbar">
+            <nav class="text-white font-serif text-[22px] mx-0 my-5 bg-black flex items-center justify-between h-16 px-3"> 
+                
+                <div class="flex items-center">
+                    <img src="D (2).png" alt="Logo" class="h-40 w-auto mr-3"> 
+                </div>
+
+                        <!-- Menu Button for Mobile -->
+        <div class="md:hidden">
+            <button id="menu-btn" class="focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+
+                <!-- Desktop Menu -->
+        <ul class="hidden md:flex space-x-4"> 
+            <li>
+                <a href="#main" class="hover:bg-zinc-600 rounded-lg px-4 py-2">Home</a>
+            </li>
+            <li>
+                <a href="about.html" class="hover:bg-zinc-600 rounded-lg px-4 py-2">About</a>
+            </li>
+            <li>
+                <a href="#footer" class="hover:bg-zinc-600 rounded-lg px-4 py-2">Contact Us</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-black text-white"> 
+            <li>
+                <a href="#main" class="hover:bg-zinc-600 rounded-lg block px-4 py-2">Home</a>
+            </li>
+            <li>
+                <a href="about.html" class="hover:bg-zinc-600 rounded-lg block px-4 py-2">About</a>
+            </li>
+            <li>
+                <a href="#footer" class="hover:bg-zinc-600 rounded-lg block px-4 py-2">Contact Us</a>
+            </li>
+        </ul>
+    </div>
+</header>
+
+            <div id=" py-15" class="py-24 px-4" >
+            <div class=" slide-in mt-24 text-center">
+                <h1 class=" fade-in-1text-5xl text-white font-bold  text-6xl">Discern AI</h1>
+                <p class="text-lg text-gray-300 mt-4">Discern the accuracy of every information in the easiest way!</p>
+                <a href="main.html" class="scale-u">
+                    <button class="rounded-xl bg-white text-black h-10 px-6 mt-6 hover:bg-slate-100 hover:ring-2 hover:ring-offset-2 hover:ring-gray-400 transition-all ease-out duration-300 font-medium">Discern</button>
+                </a>
+                <div class="facts-container" id="facts-container"></div>
+
+            </div>
+        </div>
+     
+
+
+       
+        
+   
+        <section class=" slide-in py-32 mt-12 bg-[#a3ddf0] px-4  w-full h-auto"> 
+            <div class="text-center mb-10">
+                <h2 class="text-4xl font-bold text-[#021e3a]">How It Works</h2> 
+            <div class="steps flex flex-col md:flex-row justify-around space-y-8 md:space-y-0 md:space-x-8">
+                <div class="step text-center p-5 bg-gray-200 rounded-lg shadow-md transition-transform duration-300 ease-in-out hover:translate-y-[-10px]">
+                    <i class="fas fa-paste"></i>
+                    <h3>Paste Text</h3>
+                    <p>Enter the text or URL you want to analyze.</p>
+                </div>
+                <div class="step text-center p-5 bg-gray-200 rounded-lg shadow-md transition-transform duration-300 ease-in-out hover:translate-y-[-10px]">
+                    <i class="fas fa-robot"></i>
+                    <h3>AI Analysis</h3>
+                    <p>Our AI-powered tool examines the content through various sources .</p>
+                </div>
+                <div class="step text-center p-5 bg-gray-200 rounded-lg shadow-md transition-transform duration-300 ease-in-out hover:translate-y-[-10px]">
+                    <i class="fas fa-chart-bar"></i>
+                    <h3>Get Results</h3>
+                    <p>Receive a detailed analysis and fact verdict.</p>
+                </div>
+            </div>
+        </section>
+        
+       <footer id="footer"  class="bg-black text-white py-6">
+    <div class="container mx-auto text-center">
+        <h3 class="text-lg font-bold mb-2">Contact Us</h3>
+        <p class="text-sm">Email: <a href="mailto:discern1.ai@gmail.com" class="text-blue-400 hover:underline">discern1.ai@gmail.com</a></p>
+        <p class="text-xs mt-4">© 2024 Discern AI. All rights reserved.</p>
+    </div>
+</footer>
+
+        
+
+
+<script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+    const facts = [
+            { text: "Earth is flat", status: "false" },
+            { text: "Vaccines are safe", status: "true" },
+            { text: "Climate change is real", status: "true" },
+            { text: "5G causes COVID-19", status: "false" },
+            { text: "Humans landed on the moon", status: "true" },
+            { text: "Drinking water cures dehydration", status: "true" },
+            { text: "Chocolate comes from cocoa beans", status: "true" },
+            { text: "The Great Wall of China is visible from space", status: "false" },
+            { text: "Bats are blind", status: "false" },
+            { text: "Goldfish have a 3-second memory", status: "false" }
+        ];
+
+        function createFact() {
+            const fact = facts[Math.floor(Math.random() * facts.length)];
+            const factElement = document.createElement('div');
+            factElement.className = `fact ${fact.status}`;
+            factElement.textContent = fact.text;
+            factElement.style.left = `${Math.random() * 100}%`;
+            factElement.style.animationDelay = `${Math.random() * 5}s`;
+            document.getElementById('facts-container').appendChild(factElement);
+
+            setTimeout(() => {
+                factElement.remove();
+            }, 15000);
+        }
+
+        setInterval(createFact, 2000);
+
+</script>
+
+</body>
+</html>

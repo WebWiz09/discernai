@@ -1,0 +1,141 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="dist/styles.css">
+    <link rel="icon" href="D.svg" type="image/x-icon"> 
+    <title>Discern Facts</title>
+</head>
+<body class="bg-black">
+    <header>
+        <div class="navbar">
+            <nav class="text-white font-serif text-[22px] mx-0 my-5 bg-black">
+                <ul class="text-center">
+                    <li class="mx-4 inline-block flex-row hidden md:flex ">
+                        <a href="index.html" class="hover:bg-zinc-600 rounded-lg border-spacing-1 block decoration-none ">Main</a>
+                    </li>
+            </nav>
+        </div>
+    </header>
+
+    <div id="loading-container" class="hidden flex justify-center items-center mt-10">
+        <div class="scanner-container">
+            <img src="magnifying-glass.svg" alt="Loading" class="magnifying-glass w-20 h-20">
+            <div class="scanning-area">
+                <div class="scan-line"></div>
+            </div>
+        </div>
+    </div>
+
+   
+    <div class="flex justify-center my-23 px-4 sm:px-6">
+        <div class="bg-gray-800 rounded-lg shadow-lg p-8 w-full max-w-md text-center">
+            <label class="text-white font-serif text-xl mb-4 block">
+                Check The Accuracy of Facts:
+            </label>
+            <input type="text" id="fact-input" placeholder="Enter a fact" class="w-full p-3 rounded-md mb-4">
+            <button id="fact-check-btn" class="rounded-xl bg-white text-black h-9 w-full font-[400] px-4 py-2 mt-3 btn btn-outline hover:bg-gradient-to-r hover:from-white hover:to-slate-100 hover:ring-2 hover:ring-offset-2 hover:ring-slate-300 transition-all ease-out duration-300">
+                Discern Facts
+            </button>
+        </div>
+    </div>
+
+    <div id="fact-check-result" class="my-6 max-w-2xl mx-auto"></div>
+
+    <script>
+        document.getElementById('fact-check-btn').addEventListener('click', async () => {
+            const text = document.getElementById('fact-input').value;
+
+            if (!text) {
+                alert('Please enter a fact');
+                return;
+            }
+
+         
+            const loadingContainer = document.getElementById('loading-container');
+            loadingContainer.classList.remove('hidden');
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/fact-check', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ text }),
+                });
+
+                const result = await response.json();
+                
+             
+                loadingContainer.classList.add('hidden');
+
+               
+                displayResult(result);
+            } catch (error) {
+                console.error('Error:', error);
+
+                
+                loadingContainer.classList.add('hidden');
+
+                document.getElementById('fact-check-result').innerHTML = '<p class="text-red-500">Error checking fact</p>';
+            }
+        });
+
+        function displayResult(result) {
+            const resultDiv = document.getElementById('fact-check-result');
+            resultDiv.innerHTML = `
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                    <h2 class="text-2xl font-bold mb-4">Fact Check Result</h2>
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold">Summary:</h3>
+                        <p>${result.summary}</p>
+                    </div>
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold">Verdict:</h3>
+                        <p class="${getVerdictColor(result.verdict)}">${result.verdict}</p>
+                    </div>
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold">Explanation:</h3>
+                        <p>${result.explanation}</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold">Sources:</h3>
+                        <p>${result.sources}</p>
+                    </div>
+                    ${displayLinks(result.links)}
+                </div>
+            `;
+        }
+
+        function displayLinks(links) {
+            if (!links || links.length === 0) return '';
+            
+            return `
+                <div class="mt-4">
+                    <h3 class="text-lg font-semibold">Related Articles:</h3>
+                    <ul class="list-disc list-inside">
+                        ${links.map(link => `<li><a href="${link}" target="_blank" class="text-blue-600 hover:underline">${link}</a></li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+
+        function getVerdictColor(verdict) {
+            switch (verdict.toLowerCase()) {
+                case 'truthful':
+                    return "text-green-600 font-bold";
+                case 'misleading':
+                    return 'text-yellow-600 font-bold';
+                case 'false':
+                    return 'text-red-600 font-bold';
+                case 'unverified':
+                    return 'text-gray-600 font-bold';
+                default:
+                    return 'text-black';
+            }
+        }
+    </script>
+</body>
+</html>

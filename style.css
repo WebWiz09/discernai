@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+.slider {
+    position: absolute;
+    white-space: nowrap;
+    animation: slideRight 10s linear infinite;
+}
+.ani1 {
+    display: inline-block;
+    padding: 10px;
+    background-color: #ffffff;
+   
+}
+@keyframes slideRight {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.navbar {
+    margin: 0; /* Adjust as necessary */
+}
+
+.navbar img {
+    display: inline-block; /* Ensures the logo is treated as inline with other elements */
+    vertical-align: middle; /* Aligns the logo vertically */
+}
+
+
+.facts-container {
+    position: relative; /* Position for absolute child elements */
+    overflow: hidden; /* Hide overflowing elements */
+    height: 200px; /* Set a fixed height for the container */
+    margin: 20px 0; /* Add margin for spacing */
+}
+
+.fact {
+    position: absolute;
+    font-size: 1rem; /* Adjust size for better fit */
+    padding: 10px 15px; /* Padding for the capsule shape */
+    border-radius: 25px; /* Round edges for capsule effect */
+    opacity: 0; /* Start fully transparent */
+    animation: moveUp 6s forwards; /* Animation duration */
+    transition: opacity 0.5s; /* Transition for fading */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+}
+
+.fact.true {
+    background-color: rgba(76, 175, 80, 0.3); /* Transparent green capsule */
+    color: #4CAF50; /* Darker text for visibility */
+    border: 2px solid rgba(76, 175, 80, 0.8); /* Brighter green border */
+}
+
+.fact.false {
+    background-color: rgba(244, 67, 54, 0.3); /* Transparent red capsule */
+    color: #F44336; /* Darker text for visibility */
+    border: 2px solid rgba(244, 67, 54, 0.8); /* Brighter red border */
+}
+
+@keyframes moveUp {
+    0% {
+        bottom: -50px; /* Start from below the container */
+        opacity: 1; /* Fully visible at start */
+    }
+    100% {
+        bottom: 100%; /* Moves to the top */
+        opacity: 0; /* Fades out */
+    }
+}
