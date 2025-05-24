@@ -9,6 +9,10 @@ CORS(app, resources={r"/fact-check": {"origins": ["https://discernai.vercel.app"
 client = Groq(
     api_key=os.getenv("GROQ_API_KEY")
 )
+@app.route('/')
+def home():
+    return 'Discern AI backend is live!'
+    
 @app.route('/fact-check', methods=['POST'])
 def fact_check():
     data = request.json
