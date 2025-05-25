@@ -1,14 +1,15 @@
 from flask import Flask, request, jsonify
 from groq import Groq
 from flask_cors import CORS
-import os
+
 
 app = Flask(__name__)
 CORS(app, resources={r"/fact-check": {"origins": ["https://discernai.vercel.app", "https://discernai.vercel.app/main.html"]}})
 
 client = Groq(
-    api_key=os.getenv("GROQ_API_KEY")
+    api_key="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",
 )
+
 @app.route('/')
 def home():
     return 'Discern AI backend is live!'
