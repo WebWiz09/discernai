@@ -6,6 +6,11 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app, resources={r"/fact-check": {"origins": ["https://discernai.vercel.app", "https://discernai.vercel.app/main.html"]}})
 
+print("Using API key:", client.api_key)  # Just to debug — remove later
+chat_completion = client.chat.completions.create(
+    ...
+)
+
 client = Groq(
     api_key="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",
 )
