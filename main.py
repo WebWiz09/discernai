@@ -1,18 +1,18 @@
 from flask import Flask, request, jsonify
 from groq import Groq
 from flask_cors import CORS
+import os
 
 
 app = Flask(__name__)
 CORS(app, resources={r"/fact-check": {"origins": ["https://discernai.vercel.app", "https://discernai.vercel.app/main.html"]}})
 
-print("Using API key:", client.api_key)  # Just to debug — remove later
-chat_completion = client.chat.completions.create(
-    ...
-)
+api_key = os.getenv("GROQ_API_KEY")
+print("DEBUG: API key is:", api_key)  # Just for testing, remove later
+
 
 client = Groq(
-    api_key="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",
+    api_key=api_key,
 )
 
 @app.route('/')
